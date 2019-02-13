@@ -7,4 +7,4 @@ export class ScreenUserPipe implements PipeTransform {
        return users.filter(name => name != "Butthead");
         
     }
-}
+} 
