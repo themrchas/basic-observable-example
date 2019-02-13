@@ -6,10 +6,13 @@ import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
 import { FormsModule } from '@angular/forms';
 
+import { ScreenUserPipe } from "./pipes";
+
 @NgModule({
   declarations: [
     AppComponent,
-    MessagesComponent
+    MessagesComponent,
+    ScreenUserPipe
   ],
   imports: [
     BrowserModule,

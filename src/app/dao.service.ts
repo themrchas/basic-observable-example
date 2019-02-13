@@ -20,14 +20,13 @@ export class DaoService {
   }
 
   updateUsers(name: string): void {
-
+    console.log('Adding user',name,'in dao.service');
     this.dynamicUsers.push(name);
+    console.log('dynamicUsers in dao service are',this.dynamicUsers);
+
   }
 
   ngOnInit() {}
-
-    
-
 
 
   constructor() { 

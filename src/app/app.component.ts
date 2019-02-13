@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { DaoService } from "./dao.service";
+import { ScreenUserPipe } from "./pipes";
 
 @Component({
   selector: 'app-root',
