@@ -20,6 +20,13 @@ export class AppComponent {
     this.daoService.obGetUsers().subscribe(names => this.observeUsers = names);
 
   }
+
+  filterButthead(users:string[]): string[] {
+    console.log('executing filterButthead with', users);
+
+    return users.filter(name => name != "Butthead");
+
+  }
  
 
   constructor(private daoService:DaoService) {}
