@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of} from 'rxjs';
+import { Observable, of, from} from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DaoService {
 
   dynamicUsers: string[];
@@ -15,7 +16,8 @@ export class DaoService {
   }
 
   obGetUsers():Observable<string[]> {
-
+    
+        console.log('Executing obGetUsers in dao.service...');
         return of(this.dynamicUsers);
   }
 
@@ -32,6 +34,8 @@ export class DaoService {
   constructor() { 
 
     this.dynamicUsers = ['Alice','Greg','Marcia','Bobby'];
+
+    this.more
 
 
   }
