@@ -19,6 +19,7 @@ export class DaoService {
     
         console.log('Executing obGetUsers in dao.service...');
         return of(this.dynamicUsers);
+       
   }
 
   updateUsers(name: string): void {
@@ -26,16 +27,26 @@ export class DaoService {
     this.dynamicUsers.push(name);
     console.log('dynamicUsers in dao service are',this.dynamicUsers);
 
+     let to = setTimeout( () =>  { console.log('Adding Ozzy to the list'); this.dynamicUsers.push('Ozzy Osbourne'); clearTimeout(to); }, 5000);
+      
+
   }
 
-  ngOnInit() {}
+
+  
+
+  ngOnInit() { }
 
 
   constructor() { 
 
     this.dynamicUsers = ['Alice','Greg','Marcia','Bobby'];
+   // this.dynamicUsers.push('Mrs Brady');
 
-    this.more
+    //console.log('dao service constructor activated');
+   // setTimeout( () =>  { console.log('Adding Mr. Brady to the list', this.dynamicUsers); this.updateUsers('Mr. Brady'); }, 5000);
+
+  
 
 
   }
