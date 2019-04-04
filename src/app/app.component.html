@@ -15,12 +15,12 @@
 
 <!-- <div *ngFor="let user of ( observeUsers | screenUser)"> -->
   <!--<div *ngFor="let user of observeUsers"> -->
-    
+    <ng-container *ngIf="observeUsers">
       <div *ngFor="let user of filterButthead(observeUsers)">
         <ul>
           <li>{{user}}</li>
         </ul>
       </div>
-   
+    </ng-container>
 
 <app-messages></app-messages>
