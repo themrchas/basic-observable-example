@@ -92,7 +92,7 @@ export class AppComponent {
  
  const busyValues = this.daoService.obGetUsersByValue().subscribe(observerByValue);
    
-const genericBusy = this.daoService.genericCreateObservable().subscribe(genericObserver);
+const genericBusy = this.daoService.genericCreateObservableScan().subscribe(genericObserver);
 
 
    

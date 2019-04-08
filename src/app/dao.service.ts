@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, from} from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, from, pipe} from 'rxjs';
+import { map, filter, scan, } from 'rxjs/operators';
 
 
 
@@ -27,13 +27,14 @@ export class DaoService {
        
   }
 
-  //emit as values
+  //Emit as values
   obGetUsersByValue():Observable<string> {
     
     console.log('Executing obGetUsersByValue in dao.service...');
 
-    //Example of getting value from Observable, applying a map transform, and re-packaging into Observable
-    return from(this.dynamicUsers).pipe( map(val => val + " from Brady Bunch"));
+    //Example of getting value from Observable, applying a map transform, filtering, and re-packaging into Observable
+    return from(this.dynamicUsers).pipe( map(val => val + " from Brady Bunch"), 
+       filter(val => !val.includes("Marcia")) );
 
 
     // Return a copy of the dynamicUsers array;  this breaks any type of reference to the array 
@@ -41,12 +42,27 @@ export class DaoService {
    
 }
 
-genericCreateObservable():Observable<string> {
+//Accumulate and emit value
+genericCreateObservableScan():Observable<number> {
 
   console.log('Executing genericCreateObservable in dao.service...');
-  return of("world");
+  return of(1,2,3,4,5,6).pipe(scan((total,curr) => (total+curr),0));
 
 }
+
+
+genericStandAlonePipe():Observable<string> {
+
+  const thePipe = pipe(
+    map(val => (val != "Butthead") ? val : val+"HeHeHeHe")
+    
+  );
+
+  const postMap$ =  thePipe( of(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+
+  return postMap$;
+};
+
 
 
 
