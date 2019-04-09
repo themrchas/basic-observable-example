@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, from, pipe} from 'rxjs';
-import { map, filter, scan, } from 'rxjs/operators';
+
+//pipe is for stand aline pipe, not method of Observable
+import { Observable, of, pipe, from } from 'rxjs';    
+
+
+import { map, filter, scan, catchError} from 'rxjs/operators';
 
 
 
@@ -42,7 +46,7 @@ export class DaoService {
    
 }
 
-//Accumulate and emit value
+//Accumulate and emit value using scan
 genericCreateObservableScan():Observable<number> {
 
   console.log('Executing genericCreateObservable in dao.service...');
@@ -51,17 +55,45 @@ genericCreateObservableScan():Observable<number> {
 }
 
 
-genericStandAlonePipe():Observable<string> {
+//Standalone pipe
+standAlonePipe():Observable<string> {
 
   const thePipe = pipe(
-    map(val => (val != "Butthead") ? val : val+"HeHeHeHe")
+    map( (val: string) => (val != "Butthead") ? val : val+"   HeHeHeHe")
     
   );
 
-  const postMap$ =  thePipe( of(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+  const postMap$ =  thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
 
   return postMap$;
+
+ 
 };
+
+
+//Observable throwing error using stand alone pipe;  Processing will occur until error is thrown.
+throwErrorObservable():Observable<string> {
+
+  const thePipe = pipe(
+
+    map( (val: string) => {
+
+      if (val == "Butthead") { 
+        throw new Error('Butthead found!')
+      }
+
+      return val;  //Note that this returns the value in an Observable
+    }),
+
+    catchError(err => {
+      return of(err);
+    })
+
+  );
+    
+    return thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+  
+  }
 
 
 
