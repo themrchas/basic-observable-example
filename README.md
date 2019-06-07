@@ -10,4 +10,10 @@ https://angular.io/guide/pipes#pipes-and-change-detection
 
 reactivex.io/rxjs/class/es6/Observable.js-Observable.html
 
-www.concretepage.com/angular/angular-observable.html
+www.concretepage.com/angular-2/angular-observable.html
+
+https://www.concretepage.com/angular/angular-rxjs-filter  - Many interesting things with pipes.
+
+http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-scan   All observable methods
+
+https://blog.angular-university.io/rxjs-error-handling/ observable error handling

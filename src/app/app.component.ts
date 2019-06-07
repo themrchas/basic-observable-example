@@ -95,16 +95,24 @@ export class AppComponent {
 };
 
 
- // const busyValuesByRefernece = this.daoService.obGetUsers().subscribe(observer);
+
+//Example of an array being passed by Observable.  Note that the array is passed by reference so any changes made here are reflected
+//back in the dao.service.
+ //const busyValuesByReference = this.daoService.obGetUsers().subscribe(observer);
 
  
-// const busyValues = this.daoService.obGetUsersByValue().subscribe(observerByValue);
+ //const busyValues = this.daoService.obGetUsersByValue().subscribe(observerByValue);
    
 //const genericBusy = this.daoService.genericCreateObservableScan().subscribe(genericObserver);
 
 //const standAlone = this.daoService.standAlonePipe().subscribe(genericObserver);
 
-const throwError = this.daoService.throwErrorObservable().subscribe(throwErrorObserver);
+
+//Uses tap function
+//const tapObservable = this.daoService.tapPipe().subscribe(genericObserver);
+
+//const throwError = this.daoService.throwErrorObservable().subscribe(throwErrorObserver);
+const throwError = this.daoService.throwErrorObservable2().subscribe(throwErrorObserver);
 
 
    

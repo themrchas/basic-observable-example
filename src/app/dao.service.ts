@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 
 //pipe is for stand aline pipe, not method of Observable
-import { Observable, of, pipe, from } from 'rxjs';    
+import { Observable, of, pipe, from, throwError } from 'rxjs';    
 
 
-import { map, filter, scan, catchError} from 'rxjs/operators';
+import { map, filter, scan, catchError, tap} from 'rxjs/operators';
+import { validateConfig } from '@angular/router/src/config';
 
 
 
@@ -25,9 +26,12 @@ export class DaoService {
   //Emit object
   obGetUsers():Observable<string[]> {
     
+        //Note that in this example, the array is passed by reference so any changes made by another component are made in this component as well.
         console.log('Executing obGetUsers in dao.service...');
         return of(this.dynamicUsers);
-      //return of(this.dynamicUsers.slice(0));
+        
+      //This will return a copy of the array, not a reference so dynamicUsers never changes due to passed reference in another component
+     // return of(this.dynamicUsers.slice(0));
        
   }
 
@@ -50,12 +54,12 @@ export class DaoService {
 genericCreateObservableScan():Observable<number> {
 
   console.log('Executing genericCreateObservable in dao.service...');
-  return of(1,2,3,4,5,6).pipe(scan((total,curr) => (total+curr),0));
+  return of(1,2,3,4,5,6).pipe(scan((total,curr) => total+curr,0));
 
 }
 
 
-//Standalone pipe
+//Standalone pipe that can 'wrap' an observable
 standAlonePipe():Observable<string> {
 
   const thePipe = pipe(
@@ -95,7 +99,57 @@ throwErrorObservable():Observable<string> {
   
   }
 
+  throwErrorObservable2():Observable<string> {
 
+    const thePipe = pipe( 
+
+   
+
+  //In this example, an error is thrown which terminates the Observable stream.  The error function callback in subscribe will be invoked.
+  /* map( (val:string) => {
+        if (val == "Daria")
+          throw new Error("Daria encountered in map");
+        else
+          return val;
+    }) */
+
+//Shows how to gracefully catch an error in the observable stream. The stream stops after error is thrown.
+//Note that the subscribe function receives the error as a 'normal' emitted value vice an 'error' emitted value
+    map( (val:string) => {
+      if (val == "Daria")
+        throw new Error("Daria encountered in map");
+      else
+        return val;
+  }),
+  catchError(err => {
+   // console.log("Caught error",err);
+    return of(err);
+  })
+  
+  
+    );
+      
+      return thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+
+     // return pipeResult$;
+    
+    }
+
+
+
+
+  tapPipe():Observable<string> {
+
+    const thePipe = pipe(
+      tap( (val:string) => console.log('Current tap value is ',val),
+      map( (val:string) => val + "taped"))
+    );
+
+    const postMap$ =  thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+
+    return postMap$;
+
+  }
 
 
 
