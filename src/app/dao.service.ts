@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 //pipe is for stand aline pipe, not method of Observable
-import { Observable, of, pipe, from } from 'rxjs';    
+import { Observable, of, pipe, from, throwError } from 'rxjs';    
 
 
-import { map, filter, scan, catchError} from 'rxjs/operators';
+import { map, filter, scan, catchError, finalize} from 'rxjs/operators';
 
 
 
@@ -94,6 +94,34 @@ throwErrorObservable():Observable<string> {
     return thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
   
   }
+  
+//Observable throwing error using stand alone pipe;  Processing will occur until error is thrown.
+//All observables returned from map() are processed by ther 'next' callback
+throwErrorObservable2():Observable<string> {
+
+  const thePipe = pipe(
+
+    map( (val: string) => {
+
+      if (val == "Butthead") { 
+        throw new Error('Butthead found!')
+        //return throwError('Butthead found');
+    
+      }
+
+      return val;  //Note that this returns the value in an Observable
+    }),
+    finalize( () => console.log('Finalize statement executed'))
+
+    
+  );
+    
+    return thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+  
+  }
+
+
+
 
 
 

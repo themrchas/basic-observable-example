@@ -104,8 +104,14 @@ export class AppComponent {
 
 //const standAlone = this.daoService.standAlonePipe().subscribe(genericObserver);
 
-const throwError = this.daoService.throwErrorObservable().subscribe(throwErrorObserver);
 
+//Original event stream is interrupted but since the thrown error is caught and emitted gracefully, the subscribe handler 'error' is not invoked
+//const throwError = this.daoService.throwErrorObservable().subscribe(throwErrorObserver);
+
+
+//Note that the subscribe  object invokes the 'error' callback.  The thrown error bubbles up to the error callback
+//also uses finalize()
+const throwError = this.daoService.throwErrorObservable2().subscribe(throwErrorObserver);
 
    
  }
