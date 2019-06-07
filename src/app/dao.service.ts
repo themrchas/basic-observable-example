@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of, pipe, from, throwError } from 'rxjs';    
 
 
-import { map, filter, scan, catchError, tap} from 'rxjs/operators';
+import { map, filter, scan, catchError, tap, finalize} from 'rxjs/operators';
 import { validateConfig } from '@angular/router/src/config';
+
 
 
 
@@ -98,45 +99,31 @@ throwErrorObservable():Observable<string> {
     return thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
   
   }
-
-  throwErrorObservable2():Observable<string> {
-
-    const thePipe = pipe( 
-
-   
-
-  //In this example, an error is thrown which terminates the Observable stream.  The error function callback in subscribe will be invoked.
-  /* map( (val:string) => {
-        if (val == "Daria")
-          throw new Error("Daria encountered in map");
-        else
-          return val;
-    }) */
-
-//Shows how to gracefully catch an error in the observable stream. The stream stops after error is thrown.
-//Note that the subscribe function receives the error as a 'normal' emitted value vice an 'error' emitted value
-    map( (val:string) => {
-      if (val == "Daria")
-        throw new Error("Daria encountered in map");
-      else
-        return val;
-  }),
-  catchError(err => {
-   // console.log("Caught error",err);
-    return of(err);
-  })
   
-  
-    );
-      
-      return thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+//Observable throwing error using stand alone pipe;  Processing will occur until error is thrown.
+//All observables returned from map() are processed by ther 'next' callback
+throwErrorObservable2():Observable<string> {
 
-     // return pipeResult$;
+  const thePipe = pipe(
+
+    map( (val: string) => {
+
+      if (val == "Butthead") { 
+        throw new Error('Butthead found!')
+        //return throwError('Butthead found');
     
-    }
+      }
 
+      return val;  //Note that this returns the value in an Observable
+    }),
+    finalize( () => console.log('Finalize statement executed'))
 
-
+    
+  );
+    
+    return thePipe( from(["Beavis", "Butthead", "Daria", "Mr. Anderson"]) );
+  
+  }
 
   tapPipe():Observable<string> {
 
