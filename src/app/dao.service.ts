@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 //pipe is for stand aline pipe, not method of Observable
-import { Observable, of, pipe, from, throwError } from 'rxjs';    
+import { Observable, of, pipe, from, throwError, concat } from 'rxjs';    
 
 
-import { map, filter, scan, catchError, tap, finalize} from 'rxjs/operators';
+import { map, filter, scan, catchError, tap, finalize, isEmpty, last, first} from 'rxjs/operators';
 import { validateConfig } from '@angular/router/src/config';
 
 
@@ -138,6 +138,87 @@ throwErrorObservable2():Observable<string> {
 
   }
 
+  testEmpty():Observable<boolean> {
+
+    return from(['blah','blee']).pipe(
+      tap( (val:string) => console.log('Tapped value in \'testEmpty\' is ',val) ),
+      isEmpty()
+    )};
+
+
+    //Example of using last() with a predicate to grab values in which you are interested 
+    getLastEmitted():Observable<string> {
+
+      return from(['Beavis','Butthead','Daria','Beavis']).pipe(
+        tap( (val:string) => console.log('Tapped value in \'getLastEmitted\' is ',val) ),
+         
+        last( (val:string,idx,obs)  =>  {  
+          console.log('last: val is', val, 'index is', idx, 'Observable is',obs);
+          return (val == "Beavis" || val == "Buttheads")})
+      )
+    } 
+
+
+  //Emits an entire array
+  /*  getLastEmitted():Observable<string[]> {
+
+      return of(['Beavis','Butthead','Daria']).pipe(
+        tap( (val:string[]) => console.log('Tapped value in \'getLastEmitted\' is ',val) ),
+        last()
+      )
+    }  */
+
+
+    //Emits first element that matches the predicate.  Note that as soon as the predicate is satisfied
+    //the satisfying value is emitted and any other following values are not processed.
+    getFirstEmitted():Observable<string> {
+
+       return from(['Beavis 1','Butthead','Daria','Beavis 2']).pipe(
+        tap( (val:string) => console.log('Tapped value in \'getFirstEmitted\' is ',val) ),
+         
+       first( (val:string,idx,obs)  =>  {  
+          console.log('getFirstEmitted: val is', val, 'index is', idx, 'Observable is',obs);
+          return val.includes("Beavis") })
+      ) 
+      
+    
+    } 
+
+
+    //Example using first() with a predicate
+    getFirstEmittedWithPredicate():Observable<string> {
+
+      return from(['Beavis 1','Butthead','Daria','Beavis 2']).pipe(
+       tap( (val:string) => console.log('Tapped value in \'getFirstEmitted\' is ',val) ),
+      first (val => val.includes("2")))
+   
+   } 
+   
+
+    doConcat():Observable<string> {
+
+      const pipe1 = pipe(
+        map((x:string) => x)
+      );
+
+      const pipe2 = pipe(
+        map((x:string) => x)
+      );
+
+       const pipe1$ = pipe1( from(['Marcia','Greg','Cindy']) );
+       const pipe2$ = pipe2( from(['Beavis','Butthead','Mr. Anderson']) );
+
+       return concat(pipe1$,pipe2$);
+  
+       
+     
+
+      //This works due to the ObservableInterface property for arrays? http://reactivex.io/rxjs/class/es6/MiscJSDoc.js~ObservableInputDoc.html
+      //Based on docs, this accepts 'array-like' stuff and can convert to observables
+      //return concat(['Marcia','Greg','Cindy'],['Beavis','Butthead','Mr. Anderson']);  This works
+    
+
+    }
 
 
   updateUsers(name: string): void {

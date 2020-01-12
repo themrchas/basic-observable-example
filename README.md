@@ -8,6 +8,7 @@ https://stackoverflow.com/questions/47406804/filtering-items-by-value-inside-ngf
 
 reactivex.io/rxjs/class/es6/Observable.js-Observable.html
 
+
 www.concretepage.com/angular-2/angular-observable.html
 
 https://www.concretepage.com/angular/angular-rxjs-filter  - Many interesting things with pipes.
