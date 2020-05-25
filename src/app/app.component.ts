@@ -114,7 +114,7 @@ complete: () => console.log('firstItemObserver: got a complete notification')
 
 //Example of an array being passed by Observable.  Note that the array is passed by reference so any changes made here are reflected
 //back in the dao.service.
- //const busyValuesByReference = this.daoService.obGetUsers().subscribe(observer);
+ const busyValuesByReference = this.daoService.obGetUsers().subscribe(observer);
 
  
  //const busyValues = this.daoService.obGetUsersByValue().subscribe(observerByValue);
@@ -140,8 +140,8 @@ complete: () => console.log('firstItemObserver: got a complete notification')
 //Example of getting the last item emitted in an Observable
 //const lastValue = this.daoService.getLastEmitted().subscribe(lastItemObserver);
 
-//Example of receiving the first item using a predciate to grab said item
-const firstValue = this.daoService.getFirstEmittedWithPredicate().subscribe(firstItemObserver);
+//Example of receiving the first item using a predicate to grab said item
+//const firstValue = this.daoService.getFirstEmittedWithPredicate().subscribe(firstItemObserver);
 
 //Example of getting the last item emitted in an Observable
 //const firstValue = this.daoService.getFirstEmitted().subscribe(firstItemObserver);

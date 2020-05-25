@@ -1,0 +1,17 @@
+<button type="button" (click)="startAction()">Start Action</button>
+
+
+
+<div *ngIf="!doHide else showSpinner" >
+    No more hiding
+</div>
+
+<ng-template #showSpinner>
+
+    Spinner should be spinning...
+    
+    <mat-spinner></mat-spinner>
+
+</ng-template>
+
+  

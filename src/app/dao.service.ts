@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 //pipe is for stand aline pipe, not method of Observable
-import { Observable, of, pipe, from, throwError, concat } from 'rxjs';    
+import { Observable, of, pipe, from, throwError, concat, Observer } from 'rxjs';    
 
 
 import { map, filter, scan, catchError, tap, finalize, isEmpty, last, first} from 'rxjs/operators';
-import { validateConfig } from '@angular/router/src/config';
+//import { validateConfig } from '@angular/router/src/config';
 
 
 
@@ -92,6 +92,7 @@ throwErrorObservable():Observable<string> {
 
     catchError(err => {
       return of(err);
+     //return of("Recovered from Butthead");
     })
 
   );
@@ -230,6 +231,38 @@ throwErrorObservable2():Observable<string> {
       
 
   }
+
+
+  /****** Start functions used for controlling the progress spinner   */
+
+  actuateSpinner(): Observable<unknown> {
+
+    console.log('dao.service actuateSpinner: actuateSpinner button has been pressed');
+    
+    function sequenceSubscriber(observer) {
+      // synchronously deliver 1, 2, and 3, then complete
+      observer.next(1);
+      observer.next(2);
+      observer.next(3);
+
+      setTimeout(function() { observer.complete() }, 5000);
+     // observer.complete();
+
+    }
+
+    // Create a new Observable that will deliver the above sequence
+    const sequence = new Observable(sequenceSubscriber);
+
+    return sequence;
+
+  }
+
+
+  /********End functions dealing with spinner */
+
+
+
+ 
 
 
   

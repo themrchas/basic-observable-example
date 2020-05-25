@@ -22,3 +22,6 @@ https://stackoverflow......how-to-throw-error-from-rxjs-map-operator-angular
 https://blog.angularindepth.com/throwerror-is-not-throw-error-ad6c76c53377
 
 https://blog.angular-university.io/rxjs-error-handling/
+
+#Good refresh on templates, containers, etc
+https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/
