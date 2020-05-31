@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DaoService } from '../dao.service';
+import { $ } from 'protractor';
 //import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
@@ -11,13 +12,19 @@ import { DaoService } from '../dao.service';
 export class DelayComponent implements OnInit {
 
   doHide:boolean = true;
+  doShowBtn:boolean = true;
 
   constructor(private daoService:DaoService) { }
 
   ngOnInit() {
   }
 
-  startAction() {
+  //startAction(btn:HTMLInputElement) {
+    startAction() {  
+
+    //console.log('you pressed button', btn);
+
+    this.doShowBtn = false;
 
     
     console.log('delay.component startAction: startAction button has been pressed');

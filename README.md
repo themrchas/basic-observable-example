@@ -25,3 +25,6 @@ https://blog.angular-university.io/rxjs-error-handling/
 
 #Good refresh on templates, containers, etc
 https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/
+
+#Interesting way to access child template upon button click
+https://medium.com/@ole.ersoy/angular-button-access-by-template-reference-variable-da6f5ea47a73

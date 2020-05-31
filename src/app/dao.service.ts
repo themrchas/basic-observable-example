@@ -246,8 +246,7 @@ throwErrorObservable2():Observable<string> {
       observer.next(3);
 
       setTimeout(function() { observer.complete() }, 5000);
-     // observer.complete();
-
+     
     }
 
     // Create a new Observable that will deliver the above sequence
