@@ -257,7 +257,11 @@ throwErrorObservable2():Observable<string> {
   }
 
 
-  /********End functions dealing with spinner */
+  
+
+
+  
+
 
 
 

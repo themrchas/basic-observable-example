@@ -11,18 +11,22 @@ import { DelayComponent } from './delay/delay.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { TestPromiseComponent } from './test-promise/test-promise.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessagesComponent,
     ScreenUserPipe,
-    DelayComponent
+    DelayComponent,
+    TestPromiseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule
   ],

@@ -28,3 +28,12 @@ https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateou
 
 #Interesting way to access child template upon button click
 https://medium.com/@ole.ersoy/angular-button-access-by-template-reference-variable-da6f5ea47a73
+
+#expand/ Recursion
+https://www.youtube.com/watch?v=6qw3d3eCIOA
+https://ncjamieson.com/understanding-expand/
+https://www.learnrxjs.io/learn-rxjs/operators/transformation/expand#recursively-call-provided-function
+
+#Sharepoint search thresholds
+https://www.c-sharpcorner.com/article/handling-the-sharepoint-rest-api-search-threshold-limit-in-spfx/
+https://codewithrohit.wordpress.com/2017/06/01/sharepoint-rest-api/

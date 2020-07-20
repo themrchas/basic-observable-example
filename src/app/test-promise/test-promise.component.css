@@ -1,0 +1,8 @@
+:host {
+    margin-top: 50px; 
+    border: 3px black solid; 
+    color:red;
+    height:400px;
+    width: 400px; 
+    display: block;
+}
